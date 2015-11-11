@@ -23,7 +23,7 @@ for(int a = 0; a < 2; a++)
   for(int b = 0; b < 2; b++)
     for(int c = 0; c < 2; c++) {
       if((a =! b) || (a == b && a != c)) {
-        digitalWrite(ledPin, LOW);
+        digitalWrite(ledPin, HIGH);
       }
       pinMode(aPin, a);
       pinMode(bPin, b);
