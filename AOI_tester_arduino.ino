@@ -8,9 +8,10 @@ on-board led if the breadboard led should be on.
 #define aPin 2
 #define bPin 3
 #define cPin 4
+int delay_time = 3000;
 
 void setup() {
-int delay_time = 3000;
+Serial.begin(9600);
 pinMode(ledPin, OUTPUT);
 pinMode(aPin, OUTPUT);
 pinMode(bPin, OUTPUT);
@@ -19,21 +20,23 @@ pinMode(cPin, OUTPUT);
 
 void loop() {
 //for logic statement: AC' + A'C + AB'C
-for(int a = 0; a < 2; a++)
-  for(int b = 0; b < 2; b++)
-    for(int c = 0; c < 2; c++) {
+for(int i = 0; i < 8; i++){
+      int a = bitRead(i, 0);
+      int b = bitRead(i, 1);
+      int c = bitRead(i, 2);
+      Serial.println(String(c) + String(b) + String(a));
       if((a =! b) || (a == b && a != c)) {
         digitalWrite(ledPin, HIGH);
       }
-      pinMode(aPin, a);
-      pinMode(bPin, b);
-      pinMode(cPin, c);
+      digitalWrite(aPin, a);
+      digitalWrite(bPin, b);
+      digitalWrite(cPin, c);
       delay(delay_time);
-      switch();
+      sw();
     }
 }
 
-void switch() {
+void sw() {
   digitalWrite(ledPin, LOW);
   delay(150);
   digitalWrite(ledPin, HIGH);
